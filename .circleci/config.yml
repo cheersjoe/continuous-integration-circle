@@ -8,3 +8,16 @@ jobs:
     executor: ci-executor
     steps:
       - checkout
+      - run:
+          name: build dependencies
+          command: bundle install
+          environment:
+             ENV BUNDLER_VERSION: 2.1.4
+
+      - run:
+          name: build the jekyll site
+          command: bundle exec jekyll build
+
+      - run:
+          name: notify build is finished
+          command: echo "The build is finished!"
